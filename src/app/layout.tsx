@@ -3,7 +3,7 @@ import { Bowlby_One_SC, DM_Mono } from "next/font/google";
 
 import "./globals.css";
 import { SVGFilters } from "@/components/SVGFilters";
-import { createClient } from "@/prismicio";
+import { settings } from "@/data/settings";
 
 const bowlby = Bowlby_One_SC({
   subsets: ["latin"],
@@ -20,14 +20,11 @@ const dmMono = DM_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const client = createClient();
-  const settings = await client.getSingle("settings");
-
   return {
-    title: settings.data.site_title,
-    description: settings.data.meta_description,
+    title: settings.site_title,
+    description: settings.meta_description,
     openGraph: {
-      images: settings.data.fallback_og_image.url ?? undefined,
+      images: settings.fallback_og_image.url ?? undefined,
     },
   };
 }

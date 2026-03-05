@@ -1,12 +1,10 @@
 import { FaCartShopping, FaPlus } from "react-icons/fa6";
-import { PrismicNextLink, PrismicNextLinkProps } from "@prismicio/next";
+import Link, { LinkProps } from "next/link";
 import clsx from "clsx";
 
-
-
-// to bridge the gap without upgrading Prismic (which has breaking API changes).
-export type ButtonProps = Omit<PrismicNextLinkProps, "prefetch"> & {
-  prefetch?: boolean | "auto" | "unstable_forceStale" | null;
+export type ButtonProps = LinkProps & {
+  children?: React.ReactNode;
+  className?: string;
   color?: "orange" | "purple" | "lime";
   size?: "sm" | "md" | "lg";
   icon?: "cart" | "skateboard" | "plus";
@@ -22,7 +20,7 @@ export function ButtonLink({
   ...props
 }: ButtonProps) {
   return (
-    <PrismicNextLink
+    <Link
       className={clsx(
         "button-cutout group mx-4 inline-flex items-center bg-gradient-to-b from-25% to-75% bg-[length:100%_400%] font-bold transition-[filter,background-position] duration-300 hover:bg-bottom",
         size === "sm" && "gap-2.5 py-2 text-base",
@@ -57,7 +55,7 @@ export function ButtonLink({
         </>
       ) : null}
       {children}
-    </PrismicNextLink>
+    </Link>
   );
 }
 
