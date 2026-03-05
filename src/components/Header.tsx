@@ -2,12 +2,9 @@ import Link from "next/link";
 import React from "react";
 import { ButtonLink } from "./ButtonLink";
 import { Logo } from "./Logo";
-import { createClient } from "@/prismicio";
-import { PrismicNextLink } from "@prismicio/next";
+import { settings } from "@/data/settings";
 
-export async function Header() {
-  const client = createClient();
-  const settings = await client.getSingle("settings");
+export function Header() {
 
   return (
     <header className="header absolute left-0 right-0 top-0 z-50 ~h-32/48 ~px-4/6 ~py-4/6 hd:h-32">
@@ -20,9 +17,9 @@ export async function Header() {
           className="col-span-full row-start-2 md:col-span-1 md:col-start-2 md:row-start-1"
         >
           <ul className="flex flex-wrap items-center justify-center gap-8">
-            {settings.data.navigation.map((item) => (
+            {settings.navigation.map((item: import("../data/types").SettingsNavigationItem) => (
               <li key={item.link.text}>
-                <PrismicNextLink field={item.link} className="~text-lg/xl" />
+                <Link href={item.link.url || "/"} className="~text-lg/xl">{item.link.text}</Link>
               </li>
             ))}
           </ul>

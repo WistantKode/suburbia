@@ -1,10 +1,4 @@
 import React from "react";
-import { Content } from "@prismicio/client";
-import {
-  PrismicRichText,
-  PrismicText,
-  SliceComponentProps,
-} from "@prismicio/react";
 import clsx from "clsx";
 
 import { Bounded } from "@/components/Bounded";
@@ -19,20 +13,34 @@ declare module "react" {
   }
 }
 
-/**
- * Props for `TextAndImage`.
- */
-export type TextAndImageProps = SliceComponentProps<Content.TextAndImageSlice>;
+export type TextAndImageProps = {
+  theme: "Blue" | "Orange" | "Navy" | "Lime";
+  heading: string;
+  body: string;
+  buttonText: string;
+  buttonLink: string;
+  foreground_image: { url: string };
+  background_image: { url: string };
+  variation?: "default" | "imageOnLeft";
+  index?: number;
+};
 
 /**
  * Component for "TextAndImage" Slices.
  */
-const TextAndImage = ({ slice, index }: TextAndImageProps): React.JSX.Element => {
-  const theme = slice.primary.theme;
+const TextAndImage = ({
+  theme,
+  heading,
+  body,
+  buttonText,
+  buttonLink,
+  foreground_image,
+  background_image,
+  variation,
+  index = 0,
+}: TextAndImageProps): React.JSX.Element => {
   return (
     <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
       className={clsx(
         "sticky top-[calc(var(--index)*2rem)]",
         theme === "Blue" && "bg-texture bg-brand-blue text-white",
@@ -46,32 +54,32 @@ const TextAndImage = ({ slice, index }: TextAndImageProps): React.JSX.Element =>
         <div
           className={clsx(
             "flex flex-col items-center gap-8 text-center md:items-start md:text-left",
-            slice.variation === "imageOnLeft" && "md:order-2"
+            variation === "imageOnLeft" && "md:order-2"
           )}
         >
           <SlideIn>
             <Heading size="lg" as="h2">
-              <PrismicText field={slice.primary.heading} />
+              {heading}
             </Heading>
           </SlideIn>
           <SlideIn>
             <div className="max-w-md text-lg leading-relaxed">
-              <PrismicRichText field={slice.primary.body} />
+              <p>{body}</p>
             </div>
           </SlideIn>
           <SlideIn>
             <ButtonLink
-              field={slice.primary.button}
+              href={buttonLink}
               color={theme === "Lime" ? "orange" : "lime"}
             >
-              {slice.primary.button.text}
+              {buttonText}
             </ButtonLink>
           </SlideIn>
         </div>
 
         <ParallaxImage
-          foregroundImage={slice.primary.foreground_image}
-          backgroundImage={slice.primary.background_image}
+          foregroundImage={foreground_image}
+          backgroundImage={background_image}
         />
       </div>
     </Bounded>

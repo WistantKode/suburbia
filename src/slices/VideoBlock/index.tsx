@@ -1,7 +1,5 @@
 import React from "react";
 import { Bounded } from "@/components/Bounded";
-import { Content, isFilled } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
 import { LazyYouTubePlayer } from "./LazyYouTubePlayer";
 import clsx from "clsx";
 import Image from "next/image";
@@ -12,16 +10,16 @@ const MASK_CLASSES =
 /**
  * Props for `VideoBlock`.
  */
-export type VideoBlockProps = SliceComponentProps<Content.VideoBlockSlice>;
+export type VideoBlockProps = {
+  youtube_video_id: string;
+};
 
 /**
  * Component for "VideoBlock" Slices.
  */
-const VideoBlock = ({ slice }: VideoBlockProps): React.JSX.Element => {
+const VideoBlock = ({ youtube_video_id }: VideoBlockProps): React.JSX.Element => {
   return (
     <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
       className="bg-texture bg-zinc-900"
     >
       <h2 className="sr-only">Video Reel</h2>
@@ -47,8 +45,8 @@ const VideoBlock = ({ slice }: VideoBlockProps): React.JSX.Element => {
         />
         {/* Video */}
         <div className={clsx(MASK_CLASSES, "relative h-full")}>
-          {isFilled.keyText(slice.primary.youtube_video_id) ? (
-            <LazyYouTubePlayer youTubeID={slice.primary.youtube_video_id} />
+          {youtube_video_id ? (
+            <LazyYouTubePlayer youTubeID={youtube_video_id} />
           ) : null}
           {/* Texture overlay */}
           <Image
