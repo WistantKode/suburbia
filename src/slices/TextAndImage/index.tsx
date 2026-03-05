@@ -1,3 +1,4 @@
+import React from "react";
 import { Content } from "@prismicio/client";
 import {
   PrismicRichText,
@@ -26,7 +27,7 @@ export type TextAndImageProps = SliceComponentProps<Content.TextAndImageSlice>;
 /**
  * Component for "TextAndImage" Slices.
  */
-const TextAndImage = ({ slice, index }: TextAndImageProps): JSX.Element => {
+const TextAndImage = ({ slice, index }: TextAndImageProps): React.JSX.Element => {
   const theme = slice.primary.theme;
   return (
     <Bounded
