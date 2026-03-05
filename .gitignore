@@ -22,7 +22,7 @@ node_modules/
 # BUILD OUTPUTS
 .next/
 out/
-build/
+/build/
 dist/
 .turbo/
 .vercel/
