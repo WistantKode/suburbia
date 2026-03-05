@@ -15,7 +15,7 @@ export type TeamGridProps = SliceComponentProps<Content.TeamGridSlice>;
 /**
  * Component for "TeamGrid" Slices.
  */
-const TeamGrid = async ({ slice }: TeamGridProps): Promise<JSX.Element> => {
+const TeamGrid = async ({ slice }: TeamGridProps): Promise<React.JSX.Element> => {
   const client = createClient();
   const skaters = await client.getAllByType("skater");
 

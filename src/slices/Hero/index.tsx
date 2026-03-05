@@ -1,3 +1,4 @@
+import React from "react";
 import { asImageSrc, Content } from "@prismicio/client";
 import {
   PrismicRichText,
@@ -25,7 +26,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 /**
  * Component for "Hero" Slices.
  */
-const Hero = ({ slice }: HeroProps): JSX.Element => {
+const Hero = ({ slice }: HeroProps): React.JSX.Element => {
   const deckTextureURL =
     asImageSrc(slice.primary.skateboard_deck_texture) || DEFAULT_DECK_TEXTURE;
   const wheelTextureURL =

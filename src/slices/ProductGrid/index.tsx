@@ -1,3 +1,4 @@
+import React from "react";
 import { Content, isFilled } from "@prismicio/client";
 import {
   PrismicRichText,
@@ -18,7 +19,7 @@ export type ProductGridProps = SliceComponentProps<Content.ProductGridSlice>;
 /**
  * Component for "ProductGrid" Slices.
  */
-const ProductGrid = ({ slice }: ProductGridProps): JSX.Element => {
+const ProductGrid = ({ slice }: ProductGridProps): React.JSX.Element => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
