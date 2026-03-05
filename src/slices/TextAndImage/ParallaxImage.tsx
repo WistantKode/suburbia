@@ -1,13 +1,12 @@
 "use client";
 
-import { ImageField } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
+import Image from "next/image";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 
 type Props = {
-  foregroundImage: ImageField;
-  backgroundImage: ImageField;
+  foregroundImage: { url: string };
+  backgroundImage: { url: string };
   className?: string;
 };
 
@@ -69,18 +68,19 @@ export function ParallaxImage({
         ref={backgroundRef}
         className="col-start-1 row-start-1 transition-transform"
       >
-        <PrismicNextImage field={backgroundImage} alt="" className="w-11/12" />
+        <Image src={backgroundImage.url} alt="" width={500} height={500} className="w-11/12" />
       </div>
 
       <div
         ref={foregroundRef}
         className="col-start-1 row-start-1 transition-transform h-full w-full place-items-center"
       >
-        <PrismicNextImage
-          field={foregroundImage}
+        <Image
+          src={foregroundImage.url}
           alt=""
-          imgixParams={{ height: 600 }}
-          className="h-full max-h-[500px] w-auto"
+          width={500}
+          height={600}
+          className="h-full max-h-[500px] w-auto object-contain"
         />
       </div>
     </div>
