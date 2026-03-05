@@ -2,11 +2,16 @@ import { FaCartShopping, FaPlus } from "react-icons/fa6";
 import { PrismicNextLink, PrismicNextLinkProps } from "@prismicio/next";
 import clsx from "clsx";
 
-export type ButtonProps = PrismicNextLinkProps & {
+
+
+// to bridge the gap without upgrading Prismic (which has breaking API changes).
+export type ButtonProps = Omit<PrismicNextLinkProps, "prefetch"> & {
+  prefetch?: boolean | "auto" | "unstable_forceStale" | null;
   color?: "orange" | "purple" | "lime";
   size?: "sm" | "md" | "lg";
   icon?: "cart" | "skateboard" | "plus";
 };
+
 
 export function ButtonLink({
   color = "orange",
@@ -30,8 +35,10 @@ export function ButtonLink({
         color === "lime" && "from-brand-lime to-brand-orange text-black",
         className
       )}
-      {...props}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      {...(props as any)}
     >
+
       {icon ? (
         <>
           <div
