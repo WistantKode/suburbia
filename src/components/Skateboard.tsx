@@ -48,7 +48,7 @@ export function Skateboard({
 }: SkateboardProps) {
   const wheelRefs = useRef<THREE.Object3D[]>([]);
 
-  const { nodes } = useGLTF("/skateboard.gltf") as GLTFResult;
+  const { nodes } = useGLTF("/skateboard.gltf") as unknown as GLTFResult;
 
   // Wheel Textures
   const wheelTextures = useTexture(wheelTextureURLs);
@@ -57,7 +57,7 @@ export function Skateboard({
     texture.colorSpace = THREE.SRGBColorSpace;
   });
   const wheelTextureIndex = wheelTextureURLs.findIndex(
-    (url) => url === wheelTextureURL
+    (url) => url === wheelTextureURL,
   );
   const wheelTexture = wheelTextures[wheelTextureIndex];
 
@@ -68,7 +68,7 @@ export function Skateboard({
     texture.colorSpace = THREE.SRGBColorSpace;
   });
   const deckTextureIndex = deckTextureURLs.findIndex(
-    (url) => url === deckTextureURL
+    (url) => url === deckTextureURL,
   );
   const deckTexture = deckTextures[deckTextureIndex];
 
@@ -109,7 +109,7 @@ export function Skateboard({
         metalness: 0.5,
         roughness: 0.3,
       }),
-    [boltColor]
+    [boltColor],
   );
 
   const metalNormal = useTexture("/skateboard/metal-normal.avif");
@@ -127,7 +127,7 @@ export function Skateboard({
         metalness: 0.8,
         roughness: 0.25,
       }),
-    [truckColor, metalNormal]
+    [truckColor, metalNormal],
   );
 
   const deckMaterial = useMemo(
@@ -136,7 +136,7 @@ export function Skateboard({
         map: deckTexture,
         roughness: 0.1,
       }),
-    [deckTexture]
+    [deckTexture],
   );
 
   const wheelMaterial = useMemo(
@@ -145,7 +145,7 @@ export function Skateboard({
         map: wheelTexture,
         roughness: 0.35,
       }),
-    [wheelTexture]
+    [wheelTexture],
   );
 
   // Add Wheel Refs
@@ -185,7 +185,7 @@ export function Skateboard({
           position: [0, 0.295, 0],
         },
       }) as const,
-    []
+    [],
   );
 
   return (
